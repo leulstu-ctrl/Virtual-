@@ -13,7 +13,15 @@ export async function POST(req: Request) {
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
+
     if (!apiKey) {
+      if (process.env.NODE_ENV === "development") {
+        console.warn("GEMINI_API_KEY not found. Using mock response.");
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return NextResponse.json({
+          script: `**[Scene: Mock Studio]**\n\n(This is a mock response because GEMINI_API_KEY is missing)\n\n**Host:** Hey! Did you know you can test this app without an API key?\n\n**Guest:** No way! That's awesome.\n\n**Host:** Yeah, just set it up in .env.local when you're ready for the real magic!\n\n**Guest:** (Winks at camera) Sweet!`
+        });
+      }
       return NextResponse.json(
         { error: "Configuration Error: GEMINI_API_KEY is not defined. Please add it to your .env.local file." },
         { status: 500 }
