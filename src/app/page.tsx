@@ -136,7 +136,7 @@ export default function Home() {
         )}
 
         {script && (
-          <div className="relative bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl p-6 sm:p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <div className="relative bg-zinc-900 rounded-2xl border border-zinc-800 shadow-xl p-6 sm:p-8 transition-all duration-500">
              <div className="absolute top-4 right-4">
               <button
                 onClick={handleCopy}
